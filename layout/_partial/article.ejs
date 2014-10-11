@@ -1,0 +1,54 @@
+<% if(index) { %>
+<% if(archive) { %>
+    <a class="u-post" href="<%- url_for(post.path) %>"> 
+      <span class="time"><%- date(post.date,'YYYY-MM-DD') %></span>
+      <span class="title"><%= post.title %></span>
+    </a>
+  <% } else { %>
+     <div class="m-post">
+        <div class="u-hd">
+          <a class="title" title="<%= post.title %>" href="<%- url_for(post.path) %>"><%= post.title %></a>
+          <span class="comments" data-thread-key="<%- url_for(post.path)%>" data-count-type="comments">+0</span>
+          <span class="u-icon u-icon-comments">b</span>
+        </div>
+        <div class="m-tags">
+          <%- partial('post/tags') %>
+        </div>
+        <div class="m-cnt m-cnt-excerpt">
+          <% if(post.excerpt) { %> 
+            <%- post.excerpt%>
+          <% } else if(post.description) { %>
+            <%- post.description %>
+          <% } else { %>
+            <%- post.content %>
+          <% } %>
+        </div>
+        <div class="m-readme">
+          <%- partial('post/footer') %>
+        </div>
+     </div>
+  <% } %>
+<% } else { %>
+    <div class="g-pbd">
+      <div class="m-ptitle">
+        <h1><%= post.title %></h1>
+      </div>
+      <div class="m-pdate">
+        <time><%- date(post.date,'YYYY年MM月DD日 HH:mm') %></time>
+      </div>
+      <div class="m-cnt">
+        <% if(post.toc) { %>
+           <%- partial('post/toc') %>
+        <% } %>
+        <%- post.content %>
+      </div>
+      <div class="m-tags">
+        <%- partial('post/tags') %>
+      </div>
+      <%- partial('post/nav') %>
+      <%- partial('post/post-footer') %>
+      <%- partial('post/jiathis') %>
+      <%- partial('post/comment') %>
+    </div> 
+<% } %>
+

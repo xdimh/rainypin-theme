@@ -1,0 +1,14 @@
+<% if (site.tags.length){ %>
+<div class="m-lst">
+    <h2 id="tag">= <%= __('tags') %> =</h2>
+    <ul>
+	    <% site.tags.each(function(tag){ %>
+          <li>
+            <a href="<%- url_for(tag.path) %>"><%= tag.name || '(no title)' %>
+            	<span class="count">(<%= tag.posts.length %>)</span>
+            </a>
+          </li>
+        <% }) %>
+    </ul>
+ </div>
+ <% } %>

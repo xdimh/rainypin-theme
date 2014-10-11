@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <%
+  var title = page.title;
+  if (is_archive()){
+    title = '归档';
+    if (is_month()){
+      title += ': ' + page.year + '/' + page.month;
+    } else if (is_year()){
+      title += ': ' + page.year;
+    }
+  } else if (is_category()){
+    title = '分类: ' + page.category;
+  } else if (is_tag()){
+    title = '标签: ' + page.tag;
+  }
+  if(!title) {
+    title = "首页";
+  }
+  %>
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="前端,分享,javascript,html,css,angular"/>
+  <meta name="description" content="前端笔记,前端博客,前端知识积累分享"/>
+  <meta name="author" content="rainypin,rainypin.me"/>
+  <meta name="viewport" content="width=device-width"/>
+  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
+  <link href='http://www.youziku.com/webfont/CSS/3cef12c30d54603d28fbb3d096d7b832' rel='stylesheet' type='text/css'/>
+  <link rel="shortcut icon" href="/favicon.ico"/>
+  <link rel="stylesheet" href="/css/common.css"/>
+</head>

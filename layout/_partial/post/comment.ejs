@@ -1,0 +1,3 @@
+<% if (theme.duoshuo.enable && page.comments){ %>
+	<div class="m-comments ds-thread" data-thread-key="<%- url_for(post.path) %>" data-title="<%= post.title %>" data-url="<%- url_for(post.path) %>"></div>
+<% } %>

@@ -1,0 +1,96 @@
+<script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<% if (theme.duoshuo.enable && page.comments){ %>
+<script type="text/javascript">
+ var duoshuoQuery = {short_name:"<%= theme.duoshuo.short_name %>"};
+   (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+   })();
+   (function(){
+            var $header = $(".m-header").eq(0);
+            $header.find('.m-nav').remove();
+            $('.m-pnav').show().appendTo($header);
+   })();
+</script> 
+<% } %>
+<script type="text/javascript">
+	(function(){
+        var postKeyIds = [], $comments = $('.comments','.g-mn'),
+            postKeyId,i,len = $comments.size();
+
+        for(i = 0; i < len; i++) {
+            postKeyId = $comments.eq(i).attr("data-thread-key");
+            postKeyIds.push(postKeyId);
+        }
+        if(len > 0) {
+            $.ajax({
+              url : 'http://api.duoshuo.com/threads/counts.jsonp?short_name=<%= theme.duoshuo.short_name %>&threads=' + postKeyIds.join(','),
+              type : 'GET',
+              dataType : 'jsonp'
+            }).done(function(data){
+               var response = data.response,$commentSpan,commentNum,thread_key;
+               for(var i = 0,len = $comments.length; i < len; i++) {
+                  $commentSpan = $comments.eq(i);
+                  thread_key = $commentSpan.attr('data-thread-key');
+                  commentNum = response[thread_key].comments;
+                  $commentSpan.text('+' + commentNum);
+               }
+            }).fail(function(err){
+
+            });
+        }       
+     })();
+</script>
+<% if (theme.totop){ %>
+	<%- partial('totop') %>
+	<script type="text/javascript">
+    (function($) {
+      // When to show the scroll link
+      // higher number = scroll link appears further down the page    
+      var upperLimit = 500;    
+      // Our scroll link element
+      var scrollElem = $('.m-totop');
+      // Scroll to top speed
+      var scrollSpeed = 400;
+      // Show and hide the scroll to top link based on scroll position    
+      scrollElem.hide();
+      $(window).scroll(function () {             
+          var scrollTop = $(document).scrollTop();        
+          if ( scrollTop > upperLimit ) {
+              $(scrollElem).stop().fadeTo(300, 1); // fade back in            
+          }else{        
+              $(scrollElem).stop().fadeTo(300, 0); // fade out
+          }
+      });
+      // Scroll to top animation on click
+      $(scrollElem).click(function(){ 
+          $('html, body').animate({scrollTop:0}, scrollSpeed); return false; 
+      });
+    })(jQuery);
+  </script>
+<% } %>
+<% if (theme.fancybox){ %>
+  <%- css('fancybox/jquery.fancybox') %>
+  <%- js('fancybox/jquery.fancybox.pack') %>
+<% } %>
+<script type="text/javascript">
+  $('.m-cnt').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+
+  if ($.fancybox){
+    $('.fancybox').fancybox();
+  }
+</script>

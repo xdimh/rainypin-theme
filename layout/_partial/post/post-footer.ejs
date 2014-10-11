@@ -1,0 +1,10 @@
+<% if (post.prev || post.next){ %>
+	<div class="m-pdpager">
+		 <% if (post.prev){ %>
+		 	<a class="previous" href="<%- url_for(post.prev.path) %>">上一篇： <%= post.prev.title %></a>
+		 <% } %>
+		 <% if (post.next){ %>
+			<a class="next" href="<%- url_for(post.next.path) %>">下一篇： <%= post.next.title %></a>
+		 <% } %>
+	</div>
+<% } %>

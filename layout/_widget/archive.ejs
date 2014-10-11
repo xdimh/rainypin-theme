@@ -1,0 +1,6 @@
+<% if (site.posts.length){ %>
+  <div class="m-lst m-lst-archive">
+    <h2>= <%= __('archive_a') %> =</h2>
+    <%- list_archives({format:'YYYY年MM月'}) %>
+  </div>
+<% } %>

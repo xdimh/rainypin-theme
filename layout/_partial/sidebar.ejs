@@ -1,0 +1,27 @@
+ <% var archive = is_archive() %>
+ <div class="g-sd">
+      <div class="m-aboutme">
+          <div class="avatar">
+            <img src="/img/luffy02.jpg" alt="avatar">
+          </div>
+          <h2>雨针-rainypin</h2>
+      </div>
+      <div class="m-lst">
+         <ul>
+          <li><a href="/">首页</a></li>
+          <li><a href="/archives">归档</a></li>
+          <% if(!archive) {%>
+            <li><a href="#category">分类</a></li>
+            <li><a href="#weibo">微博</a></li>
+            <li><a href="#tagcloud">标签云</a></li>
+          <% } %>
+        </ul>
+      </div>
+      <% if(archive) {%>
+        <%- partial('_widget/archive') %>
+      <% } else { %>
+        <% theme.widgets.forEach(function(widget){ %>
+          <%- partial('_widget/' + widget) %>
+        <% }) %>
+      <% } %>
+</div>

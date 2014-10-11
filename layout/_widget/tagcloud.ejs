@@ -1,0 +1,8 @@
+<% if (site.tags.length){ %>
+  <div class="m-lst m-lst-tagcloud">
+    <h2 id="tagcloud">= <%= __('tagcloud') %> =</h2>
+    <div class="tagcloudlist clearfix">
+       <%- tagcloud({min_font:12,max_font:20}) %>
+    </div>
+  </div>
+<% } %>

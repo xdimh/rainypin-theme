@@ -1,0 +1,14 @@
+<% if (site.categories.length){ %>
+ 	<div class="m-lst">
+	    <h2 id="category">= <%= __('categories') %> =</h2>
+	    <ul>
+		    <% site.categories.each(function(category){ %>
+	          <li>
+	            <a href="<%- url_for(category.path) %>"><%= category.name || '(no title)' %>
+	            	<span class="count">(<%= category.posts.length %>)</span>
+	            </a>
+	          </li>
+	        <% }) %>
+        </ul>
+  	</div>
+<% } %>

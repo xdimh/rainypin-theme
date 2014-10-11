@@ -1,0 +1,8 @@
+<div class="m-pnav" style="display:none;">
+	<% if(post.prev) { %>
+		<a class="previous" href="<%- url_for(post.prev.path) %>"><</a>
+	<% } %>
+	<% if(post.next) { %>
+		<a class="next" href="<%- url_for(post.next.path) %>">></a>
+	<% } %>
+</div>

@@ -1,0 +1,21 @@
+<div class="g-mn">
+<% if(is_archive()) { %>
+	<% page.posts.each(function(post){ %>
+		<%- partial('_partial/article', {post: post, index: true,archive: true}) %>
+	<% }); %>
+<% } else { %>
+	<% page.posts.each(function(post){ %>
+		<%- partial('_partial/article', {post: post, index: true,archive: false}) %>
+	<% }); %>
+<% } %>
+<% if (page.total > 1){ %>
+ <div class="m-pager">
+    <%- paginator({
+      prev_text:'← 上一页',
+      next_text:'下一页 →',
+      end_size:4,
+      mid_size:2
+    }) %>
+ </div>
+<% } %>             
+</div>

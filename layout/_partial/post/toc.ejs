@@ -1,0 +1,6 @@
+<% if((post.toc !== false) && theme.toc.article){ %>
+	<div id="toc" class="toc-article">
+		<strong class="toc-title"><%= __('contents') %></strong>
+		<%- toc(post.content) %>
+	</div>
+<% } %>

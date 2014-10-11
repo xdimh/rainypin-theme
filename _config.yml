@@ -1,0 +1,19 @@
+# enable fancybox
+fancybox: true
+
+Rss: /atom.xml
+#### Comment
+duoshuo: 
+  enable: true  
+  short_name: xdimh
+
+toc:
+  article: true
+
+widgets:
+- recent_posts
+- category
+- weibo
+- tagcloud
+
+totop: true
